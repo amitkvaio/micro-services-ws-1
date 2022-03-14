@@ -24,7 +24,7 @@ public class CurrencyConvresion {
 	}
 
 	public CurrencyConvresion() {
-		
+
 	}
 
 	public Long getId() {

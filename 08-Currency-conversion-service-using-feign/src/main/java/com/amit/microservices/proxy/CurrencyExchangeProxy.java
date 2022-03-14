@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.amit.microservices.bean.CurrencyConversion;
 
 
-//@FeignClient(name="currency-exchange", url="localhost:8000")
-@FeignClient(name="currency-exchange")
+@FeignClient(name="currency-exchange", url="localhost:8000")
 public interface CurrencyExchangeProxy {
 	
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
@@ -16,3 +15,11 @@ public interface CurrencyExchangeProxy {
 			@PathVariable String from,
 			@PathVariable String to);
 }
+
+/*
+Feign is the rest service client.
+	its make it easy to call rest full web service.
+@FeignClient is used to talk with external micro services.
+	name = name of the currency-exchange microservices
+	URL = where currency-exchange ms running.
+*/

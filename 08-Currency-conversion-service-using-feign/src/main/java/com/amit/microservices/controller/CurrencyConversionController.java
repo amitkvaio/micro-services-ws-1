@@ -18,6 +18,7 @@ public class CurrencyConversionController {
 	@Autowired
 	private CurrencyExchangeProxy proxy;
 	
+	//Without using proxy
 	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
 	public CurrencyConversion calculateCurrencyConversion(
 			@PathVariable String from,
@@ -42,6 +43,7 @@ public class CurrencyConversionController {
 				currencyConversion.getEnvironment()+ " " + "rest template");	
 	}
 
+	//with using proxy
 	@GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
 	public CurrencyConversion calculateCurrencyConversionFeign(
 			@PathVariable String from,
@@ -56,6 +58,5 @@ public class CurrencyConversionController {
 				currencyConversion.getConversionMultiple(), 
 				quantity.multiply(currencyConversion.getConversionMultiple()), 
 				currencyConversion.getEnvironment() + " " + "feign");
-		
 	}
 }

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.amit.microservices</groupId>
-	<artifactId>09-Eureka-naming-server</artifactId>
+	<artifactId>09-Eureka-naming-server-setup</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>09-Eureka-naming-server</name>
 	<description>Details about eureka naming server</description>

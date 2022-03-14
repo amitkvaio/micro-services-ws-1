@@ -14,8 +14,20 @@ import com.amit.microservices.bean.CurrencyConvresion;
 @RestController
 public class CurrencyConversionController {
 	
+	@GetMapping("/currency-conversion-hard-coded-values/from/{from}/to/{to}/quantity/{quantity}")
+	//http://localhost:8100/currency-conversion-hard-coded-values/from/USD/to/INR/quantity/10
+	public CurrencyConvresion calculateCurrencyConversionHardCoded(
+			@PathVariable String from,
+			@PathVariable String to,
+			@PathVariable BigDecimal quantity) {
+			BigDecimal currencyConversion = new BigDecimal(75);
+			System.out.println("From method CurrencyConversionController@calculateCurrencyConversionHardCoded");
+		  return new CurrencyConvresion(1000L, from, to, quantity, currencyConversion,
+			quantity.multiply(currencyConversion), "8000");
+	}
+	
 	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
-	//http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+	//http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/100
 	public CurrencyConvresion calculateCurrencyConversion(
 			@PathVariable String from,
 			@PathVariable String to,
@@ -25,14 +37,16 @@ public class CurrencyConversionController {
 		uriVariables.put("from", from);
 		uriVariables.put("to", to);
 		//http://localhost:8000/currency-exchange/from/USD/to/INR
-		 ResponseEntity<CurrencyConvresion> responseEntity = 
+		
+		ResponseEntity<CurrencyConvresion> responseEntity = 
 				 new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}", 
 						 CurrencyConvresion.class,uriVariables);
-		CurrencyConvresion currencyConvresion = responseEntity.getBody();
+		
 		/*
-		 * return new CurrencyConvresion(1000L, from, to, quantity, BigDecimal.ONE,
-		 * BigDecimal.ONE, "");
-		 */
+			Fetching the CurrencyConversion object from above specified URL and we are making use of that.
+		*/
+		CurrencyConvresion currencyConvresion = responseEntity.getBody();
+		System.out.println(">>>>>>>>>>>>>>currencyConvresion>>>>>>>>>>>"+currencyConvresion);
 		
 		return new CurrencyConvresion(currencyConvresion.getId(), 
 				from, to, quantity, 

@@ -24,7 +24,7 @@ public class CurrencyConversion {
 	}
 
 	public CurrencyConversion() {
-		
+
 	}
 
 	public Long getId() {
@@ -82,5 +82,4 @@ public class CurrencyConversion {
 	public void setEnvironment(String environment) {
 		this.environment = environment;
 	}
-
 }

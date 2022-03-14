@@ -60,5 +60,4 @@ public class CurrencyExchange {
 	public void setEnvironment(String environment) {
 		this.environment = environment;
 	}
-
 }

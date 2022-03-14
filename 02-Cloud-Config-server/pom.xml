@@ -22,10 +22,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
+		<!-- 
+		
+		Spring cloud config server provides an approach where we can store all configuration for all
+		the different environment of all the microservices in a Git repository.
+
+		So, we can store all the configuration for different environments of different microservices 
+		in just one place in a centralized location and spring cloud config server can be used to 
+		expose that configuration to all the microservices.
+
+		 -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

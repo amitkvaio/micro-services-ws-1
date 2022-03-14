@@ -26,3 +26,5 @@ public class CurrencyExchangeController {
 		return currencyExchange;
 	}
 }
+
+//it will read the port number in which current instance is running.
