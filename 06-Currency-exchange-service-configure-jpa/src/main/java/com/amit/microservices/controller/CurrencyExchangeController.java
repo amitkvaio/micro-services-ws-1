@@ -20,6 +20,7 @@ public class CurrencyExchangeController {
 	@Autowired
 	private Environment environment;
 	
+	//It will return the hard-coded values.
 	@GetMapping("/currency-exchange-hard-coded/from/{from}/to/{to}")
 	public CurrencyExchange retrieveExchnageValueHardCoded(
 			@PathVariable String from,
@@ -30,7 +31,7 @@ public class CurrencyExchangeController {
 		return currencyExchange;
 	}
 	
-	@GetMapping("/currency-exchange/from/{from}/to/{to}")
+	@GetMapping("/currency-exchange-jpa/from/{from}/to/{to}")
 	public CurrencyExchange retrieveExchnageValue(
 			@PathVariable String from,
 			@PathVariable String to) {

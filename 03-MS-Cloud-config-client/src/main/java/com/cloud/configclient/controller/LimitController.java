@@ -27,13 +27,13 @@ public class LimitController {
 	
 	@GetMapping("/hard-coded-limits_")
 	public Limits retrieveLimitsHardCodedValues_() {
-		//Hard-coded values
+		//Reading the values from bootstrap.property file using @value
 		return new Limits(minimum,maximum);
 	}
 	
 	@GetMapping("/reading-from-property-file-limits")
 	public Limits retrieveLimitsReadingFromPropertiesFile() {
-		//Reading from the properties file
+		//Reading from the centralized properties file using configuration
 		return new Limits(configuration.getMinimum(),configuration.getMaximum());
 	}
 }

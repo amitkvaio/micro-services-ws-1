@@ -18,4 +18,7 @@ public class SpringCloudConfigServer {
 Here we are trying to connect spring cloud config server to Git hub repository.
 For this need to add one more annotation @EnableConfigServer, as shown in this program.
 For more details check the applicatin.properties file
+
+We have establish the connection between SprinCloudConfigServer and the remote Git repository.
+
 */

@@ -11,6 +11,7 @@ import com.amit.microservices.bean.CurrencyExchange;
 @RestController
 public class CurrencyExchangeController {
 	
+			                     //where {from} and {to} are path variable  
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public CurrencyExchange retrieveExchnageValue(
 			@PathVariable String from,
