@@ -49,7 +49,7 @@ public class CurrencyConversionController {
 				It converts and stores the response in the ResponseEntity. 
 				It returns the ResponseEntity.
 			
-			Parameters: It accepts two parameters:
+			Parameters: It accepts three parameters:
 
     		URL: The URL.
     		responseType: The type of the return value.

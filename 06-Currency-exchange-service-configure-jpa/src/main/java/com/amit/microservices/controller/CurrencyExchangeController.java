@@ -26,7 +26,7 @@ public class CurrencyExchangeController {
 			@PathVariable String from,
 			@PathVariable String to) {
 		CurrencyExchange currencyExchange = new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(50));
-		String port = environment.getProperty("local.server.port");
+		String port = environment.getProperty("local.server.port")+"_Hard-coded-values";
 		currencyExchange.setEnvironment(port);
 		return currencyExchange;
 	}
@@ -40,7 +40,7 @@ public class CurrencyExchangeController {
 		if (currencyExchange == null)
 			throw new RuntimeException("Unable to Find data for " + from + " to " + to);
 		
-		String port = environment.getProperty("local.server.port");
+		String port = environment.getProperty("local.server.port")+"_Reading-Values-from-H2-DB";
 		currencyExchange.setEnvironment(port);
 		return currencyExchange;
 	}
