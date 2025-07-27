@@ -12,28 +12,30 @@ import com.cloud.configclient.config.Configuration;
 public class LimitController {
 	
 	@Autowired
-	private Configuration configuration;
+	private Configuration conf;
 	
 	@Value("${limit-service.minimum}")
 	int  minimum;
 	@Value("${limit-service.maximum}")
 	int maximum;
+	@Value("${limit-service.name}")
+	String name;
 	
 	@GetMapping("/hard-coded-limits")
 	public Limits retrieveLimitsHardCodedValues() {
 		//Hard-coded values
-		return new Limits(1,1000);
+		return new Limits(1,1000,"Default-Hard-coded-value");
 	}
 	
-	@GetMapping("/hard-coded-limits_")
-	public Limits retrieveLimitsHardCodedValues_() {
+	@GetMapping("/reading-from-property-file")
+	public Limits readingFromPropertyFile() {
 		//Reading the values from bootstrap.property file using @value
-		return new Limits(minimum,maximum);
+		return new Limits(minimum,maximum,name);
 	}
 	
 	@GetMapping("/reading-from-property-file-limits")
 	public Limits retrieveLimitsReadingFromPropertiesFile() {
 		//Reading from the centralized properties file using configuration
-		return new Limits(configuration.getMinimum(),configuration.getMaximum());
+		return new Limits(conf.getMinimum(),conf.getMaximum(), conf.getName());
 	}
 }

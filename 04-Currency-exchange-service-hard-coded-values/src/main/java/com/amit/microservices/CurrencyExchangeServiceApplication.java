@@ -14,7 +14,6 @@ public class CurrencyExchangeServiceApplication {
 /*
 
 Here we are printing the hard-coded values - its similar to previous example.
-
 id		1000
 from	"USD"
 to		"INR"

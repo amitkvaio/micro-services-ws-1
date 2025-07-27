@@ -20,7 +20,7 @@ public class CurrencyExchangeController {
 	public CurrencyExchange retrieveExchnageValue(
 			@PathVariable String from,
 			@PathVariable String to) {
-		CurrencyExchange currencyExchange = new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(50));
+		CurrencyExchange currencyExchange = new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(86));
 		String port = environment.getProperty("local.server.port");
 		currencyExchange.setEnvironment(port);
 		return currencyExchange;

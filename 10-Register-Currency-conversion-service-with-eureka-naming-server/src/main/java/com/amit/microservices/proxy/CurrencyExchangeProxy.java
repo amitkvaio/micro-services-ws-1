@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.amit.microservices.bean.CurrencyConversion;
 
 
-//@FeignClient(name="currency-exchange", url="localhost:8000")
+//@FeignClient(name="currency-exchange", url="localhost:8000") //Hard coded value port number will not change.
 @FeignClient(name="currency-exchange")
 public interface CurrencyExchangeProxy {
 	

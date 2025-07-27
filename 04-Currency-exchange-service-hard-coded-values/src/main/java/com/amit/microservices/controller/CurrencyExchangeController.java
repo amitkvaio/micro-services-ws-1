@@ -16,7 +16,7 @@ public class CurrencyExchangeController {
 	public CurrencyExchange retrieveExchnageValue(
 			@PathVariable String from,
 			@PathVariable String to) {
-		CurrencyExchange currencyExchange = new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(75));
+		CurrencyExchange currencyExchange = new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(86));
 		return currencyExchange;
 	}
 }

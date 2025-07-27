@@ -3,6 +3,8 @@ package com.amit.microservices.controller;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,16 +16,23 @@ import com.amit.microservices.bean.CurrencyConvresion;
 @RestController
 public class CurrencyConversionController {
 	
+	@Autowired
+	private Environment environment;
+	
 	@GetMapping("/currency-conversion-hard-coded-values/from/{from}/to/{to}/quantity/{quantity}")
 	//http://localhost:8100/currency-conversion-hard-coded-values/from/USD/to/INR/quantity/10
 	public CurrencyConvresion calculateCurrencyConversionHardCoded(
 			@PathVariable String from,
 			@PathVariable String to,
 			@PathVariable BigDecimal quantity) {
-			BigDecimal currencyConversion = new BigDecimal(75);
+			
+			BigDecimal currencyConversion = new BigDecimal(85);
+			String serverPort = environment.getProperty("local.server.port");
+					
 			System.out.println("From method CurrencyConversionController@calculateCurrencyConversionHardCoded");
-		  return new CurrencyConvresion(1000L, from, to, quantity, currencyConversion,
-			quantity.multiply(currencyConversion), "8000");
+		  
+			return new CurrencyConvresion(1000L, from, to, quantity, currencyConversion,
+			quantity.multiply(currencyConversion), serverPort);
 	}
 	
 	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
@@ -56,9 +65,6 @@ public class CurrencyConversionController {
 			uriVariables the map containing variables for the URI template
 			
 			Fetching the CurrencyConversion object from above specified URL and we are making use of that.
-		
-		
-		
 		
 		*/
 		CurrencyConvresion currencyConvresion = responseEntity.getBody();

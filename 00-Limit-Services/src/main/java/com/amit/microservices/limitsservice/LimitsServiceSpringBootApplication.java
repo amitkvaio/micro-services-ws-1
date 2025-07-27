@@ -13,5 +13,4 @@ public class LimitsServiceSpringBootApplication {
 
 /*
 Reading the values from property file
-
 */
