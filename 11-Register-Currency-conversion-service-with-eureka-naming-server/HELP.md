@@ -41,21 +41,15 @@ eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
 
 
 #How to run the this application
----
 >
-First run 09-Eureka-naming-server-setup application
->
-Second run 10-Register-Currency-conversion-service-with-eureka-naming-server application
->
-Run more then one instance of 
-10-Register-Currency-conversion-service-with-eureka-naming-server By changing the port
->
-Third run 11-Register-Currency-conversion-service-with-eureka-naming-server application
->
-Check on Eureka browser weather
-   10-Register-Currency-conversion-service-with-eureka-naming-server 
+First run 09-Eureka-naming-server-setup application\
+Second run 10-Register-Currency-conversion-service-with-eureka-naming-server application\
+Run more then one instance of\ 
+10-Register-Currency-conversion-service-with-eureka-naming-server By changing the port\
+Third run 11-Register-Currency-conversion-service-with-eureka-naming-server application\
+Check on Eureka browser weather\
+   10-Register-Currency-conversion-service-with-eureka-naming-server\
 	11-Register-Currency-exchange-service-with-Eureka-naming-server, services has registered or not.
----
 
 
 

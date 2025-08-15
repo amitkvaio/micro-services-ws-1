@@ -29,6 +29,11 @@ hs_err_pid*
 **/.project
 **/.classpath
 **/.settings/
+.vscode/
+
+# Ignore all .MF files
+*.MF
+/target/
 
 
 .idea/
