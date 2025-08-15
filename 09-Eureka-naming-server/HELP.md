@@ -12,18 +12,22 @@
 ## Fein, provide an option where we can hard code multiple URLs in here, even that would not be a good solution because.
 >   @FeignClient(name="currency-exchange", url="localhost:8000,localhost:8001,localhost:8002")
 
-#### Let's say 8000 went down and let's say a new instance was brought up on 8000 or some other port
-#### Then we must change the configuration of this application of the code, of this application all
+> Let's say 8000 went down and let's say a new instance was brought up on 8000 or some other port.
+
+>Then we must change the configuration of this application of the code, of this application all.
 
 # What would happen is in a microdevices architecture, all the instances of all the micro services would register with a service registry.
 
 > The Currency Exchange Service would register with the service registry and all the other\ 
 	micro services also registered with the service registry.
 
-##### Currency conversion micro service wants to talk to the currency exchange, make service.
-##### It would ask the service registry, hey, what are the addresses of the currency exchange?
-##### he service registry would return those back to the currency and we should make a service.
-##### Ad then the currency conversion micro service can send the request out to the currency exchange micro service.
+> Currency conversion micro service wants to talk to the currency exchange, make service.
+
+>It would ask the service registry, hey, what are the addresses of the currency exchange service?
+
+>The service registry would return those back to the currency and we should make a service.
+
+>And then the currency conversion micro service can send the request out to the currency exchange micro service.
 
 # spring-cloud-starter-netflix-eureka-server
 ```
@@ -58,16 +62,17 @@ pom.xml
 
 
 >No hardcoded URLs for services.\
->Order service found User service via Eureka using its name, not IP/port.\
->If User service scales to multiple instances, Eureka + Feign can load balance calls automatically.
 
+>Order service found User service via Eureka using its name, not IP/port.\
+
+>If User service scales to multiple instances, Eureka + Feign can load balance calls automatically.
 
 ```
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 ```
 
->Both are usually set to false in Eureka Server, because it doesn’t need to register itself or \fetch service details from anywhere.
+>Both are usually set to false in Eureka Server, because it doesn’t need to register itself or fetch service details from anywhere.
 
 # spring-cloud-starter-netflix-eureka-client
 
