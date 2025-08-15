@@ -9,7 +9,7 @@
 >	As per previous example we will do like blow\
 	I will go here and change the localhost:8001, localhost:8002, localhost:8003 and so on.
 
-####Fein, provide an option where we can hard code multiple URLs in here, even that would not be a good solution because.
+## Fein, provide an option where we can hard code multiple URLs in here, even that would not be a good solution because.
 >   @FeignClient(name="currency-exchange", url="localhost:8000,localhost:8001,localhost:8002")
 
 #### Let's say 8000 went down and let's say a new instance was brought up on 8000 or some other port
@@ -84,10 +84,11 @@ server.port=8081\
 spring.application.name=user-service\
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
->
-It registers with the Eureka Server at http://localhost:8761\
-Shows up in the Eureka dashboard\
-Can be discovered by other services.
+* It **registers** with the Eureka Server at `http://localhost:8761`.
+* Shows up in the Eureka dashboard.
+* Can be discovered by other services.
+
+
 
 ## **Eureka Service Discovery Flow**
 
