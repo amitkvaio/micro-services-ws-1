@@ -17,42 +17,44 @@
 
 # What would happen is in a microdevices architecture, all the instances of all the micro services would register with a service registry.
 
+> The Currency Exchange Service would register with the service registry and all the other\ 
+	micro services also registered with the service registry.
 
-## The Currency Exchange Service would register with the service registry and all the other micro services also registered with the service registry.
-
-# Currency conversion micro service wants to talk to the currency exchange, make service.
+##### Currency conversion micro service wants to talk to the currency exchange, make service.
 ##### It would ask the service registry, hey, what are the addresses of the currency exchange?
 ##### he service registry would return those back to the currency and we should make a service.
 ##### Ad then the currency conversion micro service can send the request out to the currency exchange micro service.
 
 # spring-cloud-starter-netflix-eureka-server
-'''
+```
 pom.xml
 <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 </dependency>
-''''
+```
 
 # About Eureka Server
-> A Eureka Server is a service registry where all microservices can register themselves and discover\ other services without 	hardcoding their locations.\
+> A Eureka Server is a service registry where all microservices can register themselves and discover\ 
+	other services without 	hardcoding their locations.
 
-# Advantages
+## **4. Advantages**
 
-## Dynamic Service Discovery
->No need to hardcode IPs/ports.
+1. **Dynamic Service Discovery**
 
-## Load Balancing Support
->Works with Ribbon/Feign to balance across multiple service instances.
+   * No need to hardcode IPs and ports.
+2. **Load Balancing Support**
 
-## Fault Tolerance
-> Eureka automatically removes dead services from the registry.
+   * Works with Ribbon/Feign to call multiple instances.
+3. **Automatic Health Checks**
 
-##Supports Scaling
-> New service instances register automatically and become available for calls.
+   * Eureka removes dead instances from the registry.
+4. **Scalability**
 
-## Central View of Services
-> Eureka dashboard shows all registered services, health status, and instances.
+   * New instances automatically register and become available.
+5. **Resilience**
+
+   * Services can still use cached registry data if Eureka is temporarily unavailable.
 
 
 >No hardcoded URLs for services.\
@@ -60,19 +62,21 @@ pom.xml
 >If User service scales to multiple instances, Eureka + Feign can load balance calls automatically.
 
 
-'''
+```
 eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
-'''
+```
+
 >Both are usually set to false in Eureka Server, because it doesn’t need to register itself or \fetch service details from anywhere.
 
 # spring-cloud-starter-netflix-eureka-client
-'''
+
+```
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 </dependency>
-'''
+```
 
 # application.properties
 >
@@ -81,49 +85,9 @@ spring.application.name=user-service\
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 >
-It registers with the Eureka Server at http://localhost:8761.\
-Shows up in the Eureka dashboard.\
+It registers with the Eureka Server at http://localhost:8761\
+Shows up in the Eureka dashboard\
 Can be discovered by other services.
-
-# Eureka Service Discovery Flow
-
-                ┌──────────────────────────┐
-                │  Eureka Server (Registry) │
-                │  Port: 8761               │
-                │  Dependency:              │
-                │  spring-cloud-starter-    │
-                │  netflix-eureka-server    │
-                └───────────▲───────────────┘
-                            │
-       (Registers itself)   │
-                            │
-        ┌───────────────────┴───────────────────┐
-        │                                       │
-┌───────┴─────────┐                      ┌───────┴─────────┐
-│  User Service    │                      │ Order Service   │
-│ Port: 8081       │                      │ Port: 8082      │
-│ spring-cloud-    │                      │ spring-cloud-   │
-│ starter-netflix- │                      │ starter-netflix-│
-│ eureka-client    │                      │ eureka-client   │
-└───▲──────────────┘                      └───▲─────────────┘
-    │   (Fetch registry list)                 │
-    │                                          │
-    └─────────────┬────────────────────────────┘
-                  │
-     Calls by Service Name (No Hardcoding)
-                  │
-        ┌─────────────────────────┐
-        │ Example:                │
-        │ GET http://USER-SERVICE │
-        │ → Eureka resolves to    │
-        │   http://localhost:8081 │
-        └─────────────────────────┘
-
-Alright — here’s a **clear diagram** of how
-`spring-cloud-starter-netflix-eureka-server` (**server**) and
-`spring-cloud-starter-netflix-eureka-client` (**client**) work together in a microservices setup.
-
----
 
 ## **Eureka Service Discovery Flow**
 
