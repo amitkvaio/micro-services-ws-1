@@ -5,13 +5,13 @@
 
 ## 1. **What is Cloud?**
 
-* Cloud means **using the internet to access computing resources** like servers, storage, databases, and software instead of keeping them on your personal computer.
+* Cloud means **using the internet to access computing resources** like servers, storage, databases, and software instead of keeping them on our personal computer.
 * Cloud means using someone else’s powerful computer (server) through the internet.*
-* You don’t need to buy heavy servers or software, you can just use them on the internet.
+* We don’t need to buy heavy servers or software, we can just use them on the internet.
 
 **Example**:
 
-* Just like electricity comes from the power grid (you don’t need your own power plant), cloud provides computing power from a shared infrastructure.
+* Just like electricity comes from the power grid (we don’t need our own power plant), cloud provides computing power from a shared infrastructure.
 * Gmail, Google Drive, and Netflix all run on cloud.
 
 ```
@@ -27,7 +27,7 @@
 
 * To **reduce cost** – no need to buy and maintain big servers.
 * To **access from anywhere** – only internet is required.
-* To **grow easily** – if your app gets more users, cloud gives more servers automatically.
+* To **grow easily** – if our app gets more users, cloud gives more servers automatically.
 * To **improve reliability** – even if one server fails, another is available.
 
 **Example**:
@@ -52,7 +52,7 @@
 
 ## 4. **Advantages of Cloud**
 
-1. **Cost Saving** – Pay only for what you use.
+1. **Cost Saving** – Pay only for what we use.
 2. **Scalability** – Can grow or shrink resources easily.
 3. **Flexibility** – Work from anywhere using the internet.
 4. **Reliability** – Data is stored safely with backups.
@@ -689,7 +689,7 @@ Scaling is **automatic**, no need for manual effort.
 
 👉 Example:
 Instead of checking **Service A logs**, **Service B logs**, **Service C logs** separately →
-You can search in **one system** and see the **full journey of the request**.
+We can search in **one system** and see the **full journey of the request**.
 
 🔧 Tools used:
 
