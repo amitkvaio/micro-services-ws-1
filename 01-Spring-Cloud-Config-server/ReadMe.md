@@ -10,8 +10,8 @@
 
 * **Purpose:**
   It is a centralized configuration management service for distributed systems (microservices).
-* Instead of keeping application configurations (like database URLs, API keys, feature flags) **inside each microservice**, you store them in **one central place** (often in Git, SVN, or a local file system).
-* All microservices then **fetch** their configuration from the Config Server at startup (and even at runtime, if you enable refresh).
+* Instead of keeping application configurations (like database URLs, API keys, feature flags) **inside each microservice**, we store them in **one central place** (often in Git, SVN, or a local file system).
+* All microservices then **fetch** their configuration from the Config Server at startup (and even at runtime, if we enable refresh).
 
 ---
 
@@ -19,9 +19,9 @@
 
 ### Scenario **without** Config Server:
 
-* You have 5 microservices.
+* We have 5 microservices.
 * Each one has its own `application.properties` or `application.yml` file.
-* If you need to update a database password, you must:
+* If we need to update a database password, we must:
 
   * Open each service
   * Update the password
@@ -30,7 +30,7 @@
 
 ### Scenario **with** Config Server:
 
-* You keep configuration in a **central Git repo** (e.g., `config-repo`).
+* We keep configuration in a **central Git repo** (e.g., `config-repo`).
 * Example:
 
   * `service-a.properties`
@@ -38,24 +38,21 @@
   * `application.properties` (common configs for all services)
 * Config Server pulls the configuration from Git and provides it over HTTP.
 * All microservices read their configuration from the Config Server.
-  → **You update config in Git → All services can refresh without redeploying code.**
+  → **We update config in Git → All services can refresh without redeploying code.**
 
 ---
 
-# 📘 Spring Cloud Config Server with Local Git Repository
+## Spring Cloud Config Server with Local Git Repository
+
+---
+1. Add the dependency in our project (`spring-cloud-config-server`).
+2. Use annotation **`@EnableConfigServer`** in our Spring Boot main class.
+
+   * This enables our project as a Config Server.
 
 ---
 
-## 🔧 Setup
-
-1. Add the dependency in your project (`spring-cloud-config-server`).
-2. Use annotation **`@EnableConfigServer`** in your Spring Boot main class.
-
-   * This enables your project as a Config Server.
-
----
-
-## 📌 Why Do We Need Config Server?
+## Why Do We Need Config Server?
 
 * In **microservices**, each service usually has its own configuration (URLs, DB settings, limits, etc.).
 * Instead of keeping configs separately, we can **store all configs in one centralized Git repository**.
@@ -68,71 +65,21 @@
 
 ---
 
-## 🗂️ Example – Limits Service
-
-```java
-@ConfigurationProperties("limits-service")
-```
-
-* This tells Spring Boot:
-  👉 "Take all properties starting with `limits-service` from the config files and bind them to this class."
-
----
-
-## 🌐 Access URL for Limits Service
-
-* Run the microservice and check:
-
-  ```
-  http://localhost:2025/limits
-  ```
-
----
-
-## ⚙️ Git Repository Setup
-
-* Connect Config Server to a Git repository.
-
-### Local Git Path
+## application.properties
 
 ```properties
+spring.application.name=spring-cloud-config-server
+server.port=8888
+
+#Reading from the local git repository
 spring.cloud.config.server.git.uri=file:///D:/git/msconfig
-```
-
-### GitHub Path
-
-```properties
-spring.cloud.config.server.git.uri=https://github.com/amitkvaio/msconfig.git
-```
-
-### Use `main` branch
-
-```properties
 spring.cloud.config.server.git.default-label=main
 ```
-
 ---
 
-## ❓ Why Do We See Both Default and Dev Properties?
+## Best Practice
 
-When you access a URL like:
-
-```
-http://localhost:8888/centralized/dev
-```
-
-➡️ Spring Cloud Config Server merges properties in this order:
-
-1. Loads `centralized.properties` (**default profile**).
-2. Overrides with `centralized-dev.properties` (**dev profile**).
-
-👉 **Higher profiles override lower ones.**
-
----
-
-## 📂 Best Practice
-
-* If you don’t want default properties, **don’t create `centralized.properties`**.
+* If we don’t want default properties, **don’t create `centralized.properties`**.
 * Instead, just use environment-specific files like:
 
   * `centralized-dev.properties`
@@ -150,7 +97,7 @@ http://localhost:8888/centralized/dev
 
 ---
 
-## ⚡ Why URLs Work Without a Controller?
+## Why URLs Work Without a Controller?
 
 * We don’t need to manually write a REST Controller.
 * Spring Cloud Config Server provides an **in-built controller** when we add the dependency.
@@ -171,7 +118,6 @@ http://localhost:8888/centralized/dev
 
 * Config Server + Git Repo = Centralized Config Management.
 * Microservices can load their configs dynamically without needing separate property files in each service.
-
 ---
 
 # **URL**

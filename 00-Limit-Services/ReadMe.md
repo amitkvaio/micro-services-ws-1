@@ -7,9 +7,10 @@
 >http://localhost:2025/limits
 ---
 
-```
-<dependency> 
-	<groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-bootstrap</artifactId>
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-bootstrap</artifactId>
 </dependency>
 ```
 ---
@@ -28,8 +29,9 @@ Normally, Spring Boot reads configuration from:
 
 * `application.properties` / `application.yml`
 
-But in **microservices with Spring Cloud**, sometimes we want to load configuration from an **external source** (like **Spring Cloud Config Server**, Consul, or Vault).
-👉 For this, the app must fetch configuration **before** creating beans, otherwise, wrong or missing values may be used.
+* In **microservices with Spring Cloud**, sometimes we want to load configuration from an **external source** (like **Spring Cloud Config Server**, Consul, or Vault).
+
+* For this, the app must fetch configuration **before** creating beans, otherwise, wrong or missing values may be used.
 
 `spring-cloud-starter-bootstrap` ensures:
 
@@ -50,8 +52,9 @@ Use this dependency if:
 
 ### 📌 Example Scenario
 
-Suppose we have 10 microservices, and instead of keeping separate `application.yml` in each one,
-👉 We keep all configs in a **Spring Cloud Config Server (Git repo)**.
+Suppose we have 10 microservices, and instead of keeping separate `application.yml` in each one.
+
+* We keep all configs in a **Spring Cloud Config Server (Git repo)**.
 
 * Without `spring-cloud-starter-bootstrap`:
   Our microservice might start **before** fetching configs → leading to errors.
@@ -67,11 +70,12 @@ It ensures our service always starts with the **right configuration**.
 
 ---
 
-# **Limit-Services**
+# **00 Limit-Services**
+## **Objective**
+
+**We are reading the values of below property from the bootstrap.properties file.**
+
 ---
-
-**In this example we are reading the values of below property from the bootstrap.properties file.**
-
 ```
 limits-service.maximum=2000
 limits-service.minimum=1000
