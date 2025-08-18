@@ -48,10 +48,6 @@
 * Day time: More people visit an app → Cloud adds extra servers.*
 * Night time: Fewer visitors → Cloud reduces servers → Saves cost.*
 
-```
-
-```
-
 ---
 
 ## 4. **Advantages of Cloud**
