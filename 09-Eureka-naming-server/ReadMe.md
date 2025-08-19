@@ -1,5 +1,13 @@
 # **Eureka Service Discovery (Spring Cloud Netflix)**
 
+### **Note**
+```
+Below Three application will work together.
+09-Eureka-naming-server  
+10-Register-Currency-exchange-service-wtih-Eureka-naming-server  
+11-Register-Currency-conversion-service-with-eureka-naming-server  
+```
+
 ---
 
 ## **1. The Problem (Before Eureka)**
@@ -35,16 +43,6 @@
     <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 </dependency>
 ```
-
-### **For Eureka Client**
-
-```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-</dependency>
-```
-
 ---
 
 ## **4. Configuration**
@@ -58,19 +56,6 @@ eureka.client.fetch-registry=false
 ```
 
 > `false` → Because the server doesn’t need to register itself.
-
----
-
-### **Eureka Client (application.properties)**
-
-```properties
-server.port=8081
-spring.application.name=user-service
-eureka.client.service-url.defaultZone=http://localhost:8761/eureka
-```
-
-* Registers **user-service** with Eureka Server at port `8761`.
-
 ---
 
 ## **5. Flow of Service Discovery**
@@ -109,24 +94,3 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 5. **Resilience**
 
    * Uses cached data if Eureka is temporarily down.
-
----
-
-## **7. Example with Currency Services**
-
-* **Currency Exchange Service** registers as `CURRENCY-EXCHANGE`.
-* **Currency Conversion Service** calls using:
-
-  ```java
-  @FeignClient(name="currency-exchange")
-  ```
-* Eureka resolves the name → finds actual instance (`8000`, `8001`, etc.) → Feign + Ribbon do load balancing.
-
----
-
-👉 **In Short:**
-
-* Before: `@FeignClient(url="localhost:8000")` (Hardcoded)
-* After Eureka: `@FeignClient(name="currency-exchange")` (Dynamic, scalable, load balanced)
-
----
