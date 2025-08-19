@@ -1,173 +1,132 @@
-# Here we are just setting the Eureka naming server
-> In the previous Example - 08-Currency-conversion-service-using-feign\
-	We have hard coded currency-exchange and URL as shown below
-	@FeignClient(name="currency-exchange", url="localhost:8000")
-	
+# **Eureka Service Discovery (Spring Cloud Netflix)**
 
-# If I would want to get the currency conversions then its required to talk with different instance of currency exchange, what do I need to do?
+---
 
->	As per previous example we will do like blow\
-	I will go here and change the localhost:8001, localhost:8002, localhost:8003 and so on.
+## **1. The Problem (Before Eureka)**
 
-## Fein, provide an option where we can hard code multiple URLs in here, even that would not be a good solution because.
->   @FeignClient(name="currency-exchange", url="localhost:8000,localhost:8001,localhost:8002")
+* In earlier examples, we used **Feign** with hardcoded URLs.
 
-> Let's say 8000 went down and let's say a new instance was brought up on 8000 or some other port.
+  ```java
+  @FeignClient(name="currency-exchange", url="localhost:8000")
+  ```
+* If we had multiple instances (8000, 8001, 8002…), we had to **change the code/config** each time.
+* If one server went down or a new one came up, we had to **update URLs manually**.
+* This is **not practical** in a microservices architecture with many services.
 
->Then we must change the configuration of this application of the code, of this application all.
+---
 
-# What would happen is in a microdevices architecture, all the instances of all the micro services would register with a service registry.
+## **2. The Solution – Eureka Naming Server**
 
-> The Currency Exchange Service would register with the service registry and all the other\ 
-	micro services also registered with the service registry.
+* Eureka acts as a **Service Registry**.
+* All microservices **register themselves** with Eureka.
+* Services ask Eureka for the **address of other services**, instead of using hardcoded URLs.
 
-> Currency conversion micro service wants to talk to the currency exchange, make service.
+✅ **No Hardcoded URLs** → Just use **Service Name**
 
->It would ask the service registry, hey, what are the addresses of the currency exchange service?
+---
 
->The service registry would return those back to the currency and we should make a service.
+## **3. Dependencies**
 
->And then the currency conversion micro service can send the request out to the currency exchange micro service.
+### **For Eureka Server**
 
-# spring-cloud-starter-netflix-eureka-server
-```
-pom.xml
+```xml
 <dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 </dependency>
 ```
 
-# About Eureka Server
-> A Eureka Server is a service registry where all microservices can register themselves and discover\ 
-	other services without 	hardcoding their locations.
+### **For Eureka Client**
 
-## **4. Advantages**
-
-1. **Dynamic Service Discovery**
-
-   * No need to hardcode IPs and ports.
-2. **Load Balancing Support**
-
-   * Works with Ribbon/Feign to call multiple instances.
-3. **Automatic Health Checks**
-
-   * Eureka removes dead instances from the registry.
-4. **Scalability**
-
-   * New instances automatically register and become available.
-5. **Resilience**
-
-   * Services can still use cached registry data if Eureka is temporarily unavailable.
-
-
->No hardcoded URLs for services.\
-
->Order service found User service via Eureka using its name, not IP/port.\
-
->If User service scales to multiple instances, Eureka + Feign can load balance calls automatically.
-
-```
-eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false
-```
-
->Both are usually set to false in Eureka Server, because it doesn’t need to register itself or fetch service details from anywhere.
-
-# spring-cloud-starter-netflix-eureka-client
-
-```
+```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 </dependency>
 ```
 
-# application.properties
->
-server.port=8081\
-spring.application.name=user-service\
+---
+
+## **4. Configuration**
+
+### **Eureka Server (application.properties)**
+
+```properties
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+```
+
+> `false` → Because the server doesn’t need to register itself.
+
+---
+
+### **Eureka Client (application.properties)**
+
+```properties
+server.port=8081
+spring.application.name=user-service
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka
-
-* It **registers** with the Eureka Server at `http://localhost:8761`.
-* Shows up in the Eureka dashboard.
-* Can be discovered by other services.
-
-
-
-## **Eureka Service Discovery Flow**
-
 ```
-                ┌──────────────────────────┐
-                │  Eureka Server (Registry) │
-                │  Port: 8761               │
-                │  Dependency:              │
-                │  spring-cloud-starter-    │
-                │  netflix-eureka-server    │
-                └───────────▲───────────────┘
-                            │
-       (Registers itself)   │
-                            │
-        ┌───────────────────┴───────────────────┐
-        │                                        │
-┌───────┴─────────┐                      ┌───────┴─────────┐
-│  User Service    │                      │ Order Service   │
-│ Port: 8081       │                      │ Port: 8082      │
-│ spring-cloud-    │                      │ spring-cloud-   │
-│ starter-netflix- │                      │ starter-netflix-│
-│ eureka-client    │                      │ eureka-client   │
-└───▲──────────────┘                      └───▲─────────────┘
-    │   (Fetch registry list)                 │
-    │                                          │
-    └─────────────┬────────────────────────────┘
-                  │
-     Calls by Service Name (No Hardcoding)
-                  │
-        ┌─────────────────────────┐
-        │ Example:                │
-        │ GET http://USER-SERVICE │
-        │ → Eureka resolves to    │
-        │   http://localhost:8081 │
-        └─────────────────────────┘
-```
+
+* Registers **user-service** with Eureka Server at port `8761`.
 
 ---
 
-## **How It Works Step-by-Step**
+## **5. Flow of Service Discovery**
 
-1. **Eureka Server Starts** (`spring-cloud-starter-netflix-eureka-server`)
+1. **Eureka Server Starts** → Runs on port `8761`.
+2. **Services Register** → e.g.,
 
-   * Runs on port `8761`.
-   * Acts as the central **service registry**.
+   * `user-service` → Port 8081
+   * `order-service` → Port 8082
+3. **Heartbeat** → Services send "I am alive" signals every 30 sec.
+4. **Service Lookup** →
 
-2. **Eureka Clients Start** (`spring-cloud-starter-netflix-eureka-client`)
+   * `order-service` calls `http://USER-SERVICE`
+   * Eureka resolves it to `http://localhost:8081`.
+5. **Dynamic Updates** →
 
-   * `user-service` (port 8081) registers with Eureka Server as `USER-SERVICE`.
-   * `order-service` (port 8082) registers as `ORDER-SERVICE`.
-
-3. **Heartbeat Mechanism**
-
-   * Every 30 seconds (default), clients send a **heartbeat** to tell Eureka “I’m alive.”
-
-4. **Service Discovery**
-
-   * If `order-service` wants to talk to `user-service`:
-
-     * It makes a request using the **service name** (`USER-SERVICE`).
-     * Eureka resolves the name to the **actual IP & port**.
-     * This removes the need for hardcoded URLs.
-
-5. **Dynamic Updates**
-
-   * If `user-service` scales to 3 instances, Eureka updates the registry.
-   * Requests can be **load balanced** across instances automatically.
+   * If new instances are added, they auto-register.
+   * If a service dies, Eureka removes it.
 
 ---
 
-## **Key Advantages of This Setup**
+## **6. Advantages of Eureka**
 
-* **No hardcoded host/port** in service-to-service calls.
-* **Scalable** — new instances register automatically.
-* **Resilient** — dead services are removed from the registry.
-* **Load balancing ready** — works with Ribbon or Feign.
+1. **Dynamic Service Discovery**
 
+   * No hardcoded IPs/ports.
+2. **Load Balancing Support**
+
+   * Works with Ribbon/Feign.
+3. **Health Checks**
+
+   * Dead instances removed automatically.
+4. **Scalability**
+
+   * New instances register automatically.
+5. **Resilience**
+
+   * Uses cached data if Eureka is temporarily down.
+
+---
+
+## **7. Example with Currency Services**
+
+* **Currency Exchange Service** registers as `CURRENCY-EXCHANGE`.
+* **Currency Conversion Service** calls using:
+
+  ```java
+  @FeignClient(name="currency-exchange")
+  ```
+* Eureka resolves the name → finds actual instance (`8000`, `8001`, etc.) → Feign + Ribbon do load balancing.
+
+---
+
+👉 **In Short:**
+
+* Before: `@FeignClient(url="localhost:8000")` (Hardcoded)
+* After Eureka: `@FeignClient(name="currency-exchange")` (Dynamic, scalable, load balanced)
+
+---
