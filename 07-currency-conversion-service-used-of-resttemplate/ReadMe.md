@@ -4,7 +4,7 @@
 
 ---
 
-### 1. The Need
+# 1. The Need
 
 * We have **two microservices**:
 
@@ -19,14 +19,14 @@
 
 ---
 
-### 2. How to Call One Microservice from Another?
+# 2. How to Call One Microservice from Another?
 
 * We can use **`RestTemplate`** in Spring Boot.
 * `RestTemplate` allows us to make **REST API calls** to another microservice.
 
 ---
 
-### 3. Example with `RestTemplate`
+# 3. Example with `RestTemplate`
 
 ```java
 @RestController
@@ -69,7 +69,7 @@ public class CurrencyConversionController {
 
 ---
 
-### 4. Explanation of Code
+# 4. Explanation of Code
 
 * **Step 1:** Build `uriVariables` → `{from=USD, to=INR}`
 * **Step 2:** Call Exchange Service API →
@@ -79,7 +79,7 @@ public class CurrencyConversionController {
 
 ---
 
-### 5. Problem with `RestTemplate`
+# 5. Problem with `RestTemplate`
 
 * The code is **long and repetitive** (20+ lines).
 * If we have **hundreds of microservices** calling each other → we will need to write the same kind of code everywhere.
@@ -87,13 +87,13 @@ public class CurrencyConversionController {
 * ##### **For Better Solution reffer → 08A-Currency-conversion-service-using-feign**
 ---
 
-### 6. Note
+# 6. Note
 * `RestTemplate` works but is **tedious**.
 * For **scalable microservices** → use **Feign**.
 * Feign = less code, more readability, easier maintenance.
 ---
 
-## **application.properties**
+# **application.properties**
 
 ```properties
 spring.config.import=optional:configserver:http://localhost:8888
@@ -106,7 +106,7 @@ server.port=8100
 
 ---
 
-### **1. Start the Microservices**
+# **1. Start the Microservices**
 
 1. **First**, start the **Currency Exchange Service**
    → `06-Currency-exchange-service-configure-jpa`
@@ -115,7 +115,7 @@ server.port=8100
 
 ---
 
-### **2. Verify Currency Exchange Service**
+# **2. Verify Currency Exchange Service**
 
 * Check if the **Currency Exchange Service** is running by opening this URL in our browser:
 
@@ -123,7 +123,7 @@ server.port=8100
 
 ---
 
-### **3. Call Currency Conversion Service**
+# **3. Call Currency Conversion Service**
 
 * Once the Exchange Service is running, call the **Currency Conversion Service**:
 
@@ -131,7 +131,7 @@ server.port=8100
 
 ---
 
-### **4. Other Example URLs**
+# **4. Other Example URLs**
 
 We can also try these URLs:
 
@@ -143,7 +143,7 @@ We can also try these URLs:
 
 ---
 
-## **Sort Summary:**
+# **Sort Summary:**
 
 * Start **Exchange Service (8000)** first.
 * Start **Conversion Service (8100)** next.

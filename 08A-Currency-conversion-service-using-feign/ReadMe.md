@@ -2,7 +2,7 @@
 ## And
 # 08A – Currency Conversion Service using Feign
 
-## **Maven Dependency**
+# **Maven Dependency**
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -11,7 +11,7 @@
 ```
 ---
 
-### 1. What is Feign?
+# 1. What is Feign?
 
 * **Feign** is a **declarative REST client** provided by **Spring Cloud**.
 * It makes calling other microservices **much simpler** than using `RestTemplate`.
@@ -19,7 +19,7 @@
 
 ---
 
-### 2. What this dependency does
+# 2. What this dependency does
 
 * Adds Feign support to our Spring Boot project.
 * Automatically integrates with:
@@ -31,7 +31,7 @@
 
 ---
 
-### 3. Why do we use it?
+# 3. Why do we use it?
 
 * To call another microservice with **just 1–2 lines of code**.
 * Reduces **boilerplate code**.

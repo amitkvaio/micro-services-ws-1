@@ -1,13 +1,13 @@
-## **Reading the properties from the git repository.**
+# **Reading the properties from the git repository.**
 
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-config-server</artifactId>
+    <artifactId>sp*ring-cloud-config-server</artifactId>
 </dependency>
 ```
 ---
-# Spring Cloud Config Server with Git Repository
+# **Spring Cloud Config Server with Git Repository**
 ---
 ```properties
 spring.application.name=Cloud-Config-server

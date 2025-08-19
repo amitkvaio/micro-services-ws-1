@@ -1,4 +1,4 @@
-## **Objective**
+# **Objective**
 
 * Read values from a **centralized configuration file/property file**.
 * Before reading values, the **Spring Cloud Config Server must be started**, otherwise the application will not start.
@@ -13,14 +13,14 @@
 
 # **spring-cloud-starter-config Dependency**
 
-## **What It Is**
+# **What It Is**
 
 * It is a **Spring Boot starter** that allows our application to connect with a **Spring Cloud Config Server**.
 * It helps in **centralized configuration management**.
 
 ---
 
-## **Why We Use It (Use Cases)**
+# **Why We Use It (Use Cases)**
 
 1. **Centralized Configuration**
 
@@ -57,7 +57,7 @@
 
 ---
 
-## **How It Works**
+# **How It Works**
 
 * Add the dependency:
 
@@ -85,7 +85,7 @@ spring.cloud.config.uri=http://localhost:8888
 spring.profiles.active=prod
 ```
 
-### **spring-cloud-starter-config**
+# **spring-cloud-starter-config**
 
 * Connects the client service to the config server.
 * Uses property:
@@ -97,7 +97,7 @@ spring.profiles.active=prod
 
 ---
 
-### **spring.application.name**
+# **spring.application.name**
 
 * Example:
 
@@ -111,7 +111,7 @@ spring.profiles.active=prod
 
 ---
 
-### **spring.profiles.active**
+# **spring.profiles.active**
 
 * Example:
 
@@ -126,7 +126,7 @@ spring.profiles.active=prod
 
 ---
 
-### **spring.cloud.config.server.git.default-label**
+# **spring.cloud.config.server.git.default-label**
 
 * Example:
 
@@ -138,13 +138,13 @@ spring.profiles.active=prod
 
 ---
 
-## **@RefreshScope Annotation**
+# **@RefreshScope Annotation**
 
 * `@RefreshScope` is used to reload properties from the Config Server without restarting the application.
 * It is useful when **new properties are added** in the config file.
 ---
 
-## **Steps to Run**
+# **Steps to Run**
 
 1. Start **Spring Cloud Config Server** → Example: `02-Cloud-Config-server`.
 	> It will read the properties file from the git hub repository.
@@ -154,7 +154,7 @@ spring.profiles.active=prod
 
 ---
 
-## **URLs to Access**
+# **URLs to Access**
 * `http://localhost:2021/hard-coded-limits`
 * `http://localhost:2021/reading-from-property-file`
 * `http://localhost:2021/reading-from-property-file-limits`

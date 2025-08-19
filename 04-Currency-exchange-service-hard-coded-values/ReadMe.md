@@ -32,7 +32,7 @@ public class CurrencyExchangeController {
 ```
 
 
-## **spring.config.import Property**
+# **spring.config.import Property**
 
 * **Purpose:** Used to import configuration from an external source (like a remote Config Server).
 * Example:
@@ -42,14 +42,14 @@ public class CurrencyExchangeController {
   ```
 ---
 
-### **configserver:[http://localhost:8888](http://localhost:8888)**
+# **configserver:[http://localhost:8888](http://localhost:8888)**
 
 * Refers to a **Spring Cloud Config Server** running at `http://localhost:8888`.
 * The application will fetch its configuration from this server.
 
 ---
 
-### **optional:**
+# **optional:**
 
 * Makes the config import **optional**.
 * If the config server is:
@@ -62,9 +62,9 @@ public class CurrencyExchangeController {
 
 ---
 
-## **Access URL Example**
+# **Access URL Example**
 
-### **Currency Exchange Service**
+# **Currency Exchange Service**
 
 * URL:
 

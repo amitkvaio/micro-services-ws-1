@@ -33,7 +33,7 @@
 
 ---
 
-### ✅ Example
+### **Example**
 
 * Suppose we have these services:
 
@@ -48,7 +48,7 @@ Now, if **Currency-conversion** wants to call **Currency-exchange**:
 
 ---
 
-### ✅ Widely Used Annotations with Eureka Client
+### **Widely Used Annotations with Eureka Client**
 
 * `@EnableEurekaClient` → Marks the application as a Eureka client.
 * `@LoadBalanced` (with RestTemplate) → Enables **client-side load balancing** using Eureka service names.
@@ -145,7 +145,8 @@ This dependency is used to **make your application discoverable** (register itse
 
 ---
 
-# Using H2 Database in Spring Boot
+### **Using H2 Database in Spring Boot**
+---
 
 ### **Key Points**
 
@@ -219,7 +220,7 @@ This dependency is used to **make your application discoverable** (register itse
 
 ---
 
-### ✅ Quick Example Flow
+### **Quick Example Flow**
 
 1. Start application → H2 DB is created in memory.
 2. `data.sql` runs → Table `CURRENCY_EXCHANGE` created, USD→INR inserted.

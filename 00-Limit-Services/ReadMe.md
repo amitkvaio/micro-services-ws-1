@@ -1,9 +1,9 @@
 # Limit-Services
-#### @ConfigurationProperties("limits-service")
+#### **@ConfigurationProperties("limits-service")**
 > It tells Spring Boot: Bind all the properties starting with limits-service. 
 		from configuration files to the fields in this class.
 		
-#  Access URL
+# **Access URL**
 >http://localhost:2025/limits
 ---
 
@@ -14,16 +14,14 @@
 </dependency>
 ```
 ---
-
-### 📌 What is `spring-cloud-starter-bootstrap`?
+### **What is `spring-cloud-starter-bootstrap`?**
 
 * It is a **Spring Cloud dependency**.
 * It helps our Spring Boot application **load configuration settings early**, before the main application context starts.
 * These settings are usually kept in a **bootstrap context** (separate from the main application context).
-
 ---
 
-### 📌 Why do we need it?
+### **Why do we need it?**
 
 Normally, Spring Boot reads configuration from:
 
@@ -40,17 +38,17 @@ Normally, Spring Boot reads configuration from:
 
 ---
 
-### 📌 When should we use it?
+### **When should we use it?**
 
 Use this dependency if:
 
-1. ✅ We are using **Spring Cloud Config Server** (to fetch configs from Git, SVN, etc.).
-2. ✅ We are using **HashiCorp Vault** (to fetch secrets/credentials securely).
-3. ✅ We need to **separate bootstrap configs** (like service name, discovery settings, config server URL) from normal application configs.
+1. We are using **Spring Cloud Config Server** (to fetch configs from Git, SVN, etc.).
+2. We are using **HashiCorp Vault** (to fetch secrets/credentials securely).
+3. We need to **separate bootstrap configs** (like service name, discovery settings, config server URL) from normal application configs.
 
 ---
 
-### 📌 Example Scenario
+### **Example Scenario**
 
 Suppose we have 10 microservices, and instead of keeping separate `application.yml` in each one.
 
@@ -64,7 +62,7 @@ Suppose we have 10 microservices, and instead of keeping separate `application.y
 
 ---
 
-✅ **In short:**
+## **In short:**
 `spring-cloud-starter-bootstrap` is useful when we want our microservice to load configs (from Config Server, Vault, or Consul) **before** anything else starts.
 It ensures our service always starts with the **right configuration**.
 

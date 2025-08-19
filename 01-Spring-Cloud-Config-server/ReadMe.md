@@ -1,3 +1,4 @@
+# **About Spring cloud Config Server**
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -6,7 +7,7 @@
 ```
 ---
 
-## **1. What is Spring Cloud Config Server?**
+# **1. What is Spring Cloud Config Server?**
 
 * **Purpose:**
   It is a centralized configuration management service for distributed systems (microservices).
@@ -15,7 +16,7 @@
 
 ---
 
-## **2. Use Case**
+# **2. Use Case**
 
 ### Scenario **without** Config Server:
 
@@ -28,7 +29,7 @@
   * Rebuild & redeploy all services
     → **This is time-consuming and error-prone.**
 
-### Scenario **with** Config Server:
+## **Scenario with Config Server:**
 
 * We keep configuration in a **central Git repo** (e.g., `config-repo`).
 * Example:
@@ -42,7 +43,7 @@
 
 ---
 
-## Spring Cloud Config Server with Local Git Repository
+# **Spring Cloud Config Server with Local Git Repository**
 
 ---
 1. Add the dependency in our project (`spring-cloud-config-server`).
@@ -52,7 +53,7 @@
 
 ---
 
-## Why Do We Need Config Server?
+# **Why Do We Need Config Server?**
 
 * In **microservices**, each service usually has its own configuration (URLs, DB settings, limits, etc.).
 * Instead of keeping configs separately, we can **store all configs in one centralized Git repository**.
@@ -65,7 +66,7 @@
 
 ---
 
-## application.properties
+# **application.properties**
 
 ```properties
 spring.application.name=spring-cloud-config-server
@@ -77,7 +78,7 @@ spring.cloud.config.server.git.default-label=main
 ```
 ---
 
-## Best Practice
+# **Best Practice**
 
 * If we don’t want default properties, **don’t create `centralized.properties`**.
 * Instead, just use environment-specific files like:
@@ -87,7 +88,7 @@ spring.cloud.config.server.git.default-label=main
 
 ---
 
-## 🌍 URLs and What They Return
+# **URLs and What They Return**
 
 | URL                    | Config Files Used                                        |
 | ---------------------- | -------------------------------------------------------- |
@@ -97,7 +98,7 @@ spring.cloud.config.server.git.default-label=main
 
 ---
 
-## Why URLs Work Without a Controller?
+# **Why URLs Work Without a Controller?**
 
 * We don’t need to manually write a REST Controller.
 * Spring Cloud Config Server provides an **in-built controller** when we add the dependency.
@@ -114,7 +115,7 @@ spring.cloud.config.server.git.default-label=main
 
 ---
 
-✅ **In short:**
+# **In short:**
 
 * Config Server + Git Repo = Centralized Config Management.
 * Microservices can load their configs dynamically without needing separate property files in each service.

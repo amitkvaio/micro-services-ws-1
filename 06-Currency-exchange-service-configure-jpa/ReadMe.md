@@ -10,14 +10,14 @@
 </dependency>
 ```
 
-### 1. What is this?
+# 1. What is this?
 
 * This is a **Maven dependency**.
 * It tells Maven to include the **H2 database library** in our project.
 
 ---
 
-### 2. What is H2?
+# 2. What is H2?
 
 * H2 is a **lightweight, in-memory database**.
 * It is often used for **development, testing, and learning**.
@@ -25,7 +25,7 @@
 
 ---
 
-### 3. Why do we use this dependency?
+# 3. Why do we use this dependency?
 
 * To connect Spring Boot application with **H2 database**.
 * It allows the application to:
@@ -36,7 +36,7 @@
 
 ---
 
-### 4. How does it work?
+# 4. How does it work?
 
 * When we add this dependency:
 
@@ -46,7 +46,7 @@
 
 ---
 
-### 5. Example
+# 5. Example
 
 * Suppose we add this dependency and run the app.
 * In `application.properties` we write:
@@ -63,14 +63,14 @@
 
 ---
 
-**In short:**
+# **In short:**
 `com.h2database:h2` is required when we want to use **H2 in-memory database** with Spring Boot for quick testing and development.
 
 ---
 # Currency Exchange Service with JPA & H2 Database
 ---
 
-### 1. Database Used
+# 1. Database Used
 
 * We are using **H2 in-memory database** (data will be deleted on every restart).
 * Easy for development and testing.
@@ -78,7 +78,7 @@
 
 ---
 
-### 2. Configuration (application.properties)
+# 2. Configuration (application.properties)
 
 ```properties
 spring.jpa.show-sql=true
@@ -94,7 +94,7 @@ spring.jpa.defer-datasource-initialization=true
 
 ---
 
-### 3. Data Initialization
+# 3. Data Initialization
 
 * **File used:** `data.sql`
 * Runs automatically when application starts.
@@ -115,18 +115,18 @@ insert into currency_exchange
 values(10003,'AUD','INR',25,'0');
 ```
 
-![H2 database screen image.](./src/main/resources/images/db2_db.jpg)
+![H2 database screen image.](./src/main/resources/db2_db.jpg)
 
 ---
 
-### 4. REST Endpoints
+# 4. REST Endpoints
 
 1. **Hard-coded response**
 
    * URL: [http://localhost:8000/currency-exchange-hard-coded/from/USD/to/INR](http://localhost:8000/currency-exchange-hard-coded/from/USD/to/INR)
    * Returns fixed values (not from DB).
 
-   ✅ Example Response:
+   **Example Response:**
 
    ```json
    {
@@ -138,7 +138,7 @@ values(10003,'AUD','INR',25,'0');
    }
    ```
 
-2. **JPA-based response**
+2. # **JPA-based response**
 
    * URL: [http://localhost:8000/currency-exchange-jpa/from/USD/to/INR](http://localhost:8000/currency-exchange-jpa/from/USD/to/INR)
    * Reads data from **H2 database**.
@@ -148,7 +148,7 @@ values(10003,'AUD','INR',25,'0');
      * `/from/EUR/to/INR`
      * `/from/AUD/to/INR`
 
-   ✅ Example Response from DB:
+   **Example Response from DB:**
 
    ```json
    {
@@ -159,7 +159,7 @@ values(10003,'AUD','INR',25,'0');
      "environment": "8000"
    }
    ```
-### **Access URL**
+# **Access URL**
 ```
 http://localhost:8000/currency-exchange-hard-coded/from/USD/to/INR  
 http://localhost:8000/currency-exchange-jpa/from/USD/to/INR  
@@ -168,7 +168,7 @@ http://localhost:8000/currency-exchange-jpa/from/AUD/to/INR
 ```
 ---
 
-### 5. Key Points
+# 5. Key Points
 
 * Each restart wipes out existing data (in-memory database).
 * Useful for **testing microservices**.
@@ -182,7 +182,7 @@ http://localhost:8000/currency-exchange-jpa/from/AUD/to/INR
   spring.datasource.platform=oracle
   ```
 ---
-📌 **Example Use Case:**
+# **Example Use Case:**
 
 * If a client requests currency conversion `USD → INR`, service fetches conversion multiple (e.g., `82`) from H2 DB and returns result.
 * In real-world, this can be extended to fetch from Oracle or MySQL instead of H2.

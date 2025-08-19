@@ -1,7 +1,7 @@
 
 # **Running Multiple Instances of a Spring Boot Application**
 
-## **Why We Need It**
+# **Why We Need It**
 
 * Running multiple instances is useful for:
 
@@ -10,11 +10,11 @@
 
 ---
 
-## **Method 1: Using Command Line (VM Options)**
+# **Method 1: Using Command Line (VM Options)**
 
 * Run each instance with a **different port number** using `-Dserver.port`.
 
-### Example:
+# Example:
 
 ```bash
 java -jar myapp.jar -Dserver.port=8001
@@ -24,11 +24,11 @@ java -jar myapp.jar -Dserver.port=8003
 
 ---
 
-## **Method 2: Using Eclipse IDE**
+# **Method 2: Using Eclipse IDE**
 
 * Add **VM arguments** in the **Run Configurations**.
 
-### Example:
+# Example:
 
 ```bash
 -Dserver.port=8002
@@ -38,7 +38,7 @@ java -jar myapp.jar -Dserver.port=8003
 
 ---
 
-## **Expected Output Example**
+# **Expected Output Example**
 
 When accessing an instance, the response shows the **port number** in the `environment` field.
 
@@ -56,9 +56,9 @@ When accessing an instance, the response shows the **port number** in the `envir
 
 ---
 
-✅ This approach allows multiple instances of the same Spring Boot application to run on **different ports** at the same time.
+This approach allows multiple instances of the same Spring Boot application to run on **different ports** at the same time.
 
-## **URL**
+# **URL**
 ```
 http://localhost:8002/currency-exchange/from/USD/to/INR  
 http://localhost:8003/currency-exchange/from/USD/to/INR  
