@@ -15,7 +15,7 @@
 
 ## **What It Is**
 
-* It is a **Spring Boot starter** that allows your application to connect with a **Spring Cloud Config Server**.
+* It is a **Spring Boot starter** that allows our application to connect with a **Spring Cloud Config Server**.
 * It helps in **centralized configuration management**.
 
 ---
@@ -25,7 +25,7 @@
 1. **Centralized Configuration**
 
    * Instead of keeping `application.properties` or `application.yml` inside every microservice,
-     you keep them in a **Git repository**.
+     we keep them in a **Git repository**.
    * Example:
 
      * `limits-service-dev.properties`
@@ -53,7 +53,7 @@
 5. **Secure & Scalable**
 
    * Supports **encrypted values** (like passwords, secrets).
-   * Scales well when you have **many microservices**.
+   * Scales well when we have **many microservices**.
 
 ---
 
@@ -77,10 +77,6 @@
 
 * Now, the application will **fetch its config** from the config server running on port **8888**.
 ---
-
-Do you want me to **add this explanation** to your existing **Spring Cloud Config notes** and prepare a combined **study document (.docx/.pdf)** for you?
-
-
 
 ```properties
 spring.application.name=centralized
