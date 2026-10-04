@@ -1,3 +1,77 @@
+﻿# Limit Service
+
+This learning chapter is part of the micro-services-ws-1 workspace.
+
+## Agenda
+
+- [Problem we will solve](#problem-we-will-solve)
+- [What you will learn](#what-you-will-learn)
+- [How to run](#how-to-run)
+- [Example](#example)
+- [Key points or common mistakes](#key-points-or-common-mistakes)
+- [Chapter summary and next step](#chapter-summary-and-next-step)
+- [Common interview questions](#common-interview-questions-and-short-answers)
+- [Existing content preserved](#existing-content-preserved)
+
+## Problem We Will Solve
+
+This chapter solves the first problem of reading limit values from application configuration and exposing them through a REST API.
+
+## What You Will Learn
+
+- How a simple Spring Boot REST service works
+- How configuration values are bound with @ConfigurationProperties
+- How to expose values using /limits
+
+## How To Run
+
+- Run from 00-Limit-Services: mvn spring-boot:run
+- Open http://localhost:2025/limits
+- Optional jar run after packaging: java -jar target/00-Limit-Services-0.0.1-SNAPSHOT.jar --server.port=8002
+
+## Example
+
+`	ext
+GET http://localhost:2025/limits
+`
+
+Use the response to verify the service starts correctly and the configured endpoint is reachable.
+
+## Key Points Or Common Mistakes
+
+- Keep supporting services running when a chapter depends on them.
+- Check the configured port before opening the URL.
+- Do not change code while testing documentation examples unless the chapter asks for it.
+
+## Chapter Summary And Next Step
+
+This chapter adds one small step in the microservices learning path.
+Continue with [01-Spring-Cloud-Config-server](../01-Spring-Cloud-Config-server/README.md), which solves the next problem in the learning path.
+
+## Common Interview Questions And Short Answers
+
+**Q1. What is the purpose of Limit Service?**  
+It exposes minimum and maximum values from configuration.
+
+**Q2. What does @ConfigurationProperties do?**  
+It binds external properties to a Java bean.
+
+**Q3. Why start with this service?**  
+It gives a simple baseline before introducing centralized config.
+
+**Q4. Which port is used here?**  
+The service runs on port 2025.
+
+**Q5. What endpoint is exposed?**  
+The endpoint is /limits.
+
+**Q6. Can the port be changed?**  
+Yes, pass --server.port when running the jar.
+
+## Existing Content Preserved
+
+The section below keeps the original README notes from this project so no existing explanation, command, example, or technical detail is lost.
+
 # Limit-Services
 #### **@ConfigurationProperties("limits-service")**
 > It tells Spring Boot: Bind all the properties starting with limits-service. 
@@ -55,10 +129,10 @@ Suppose we have 10 microservices, and instead of keeping separate `application.y
 * We keep all configs in a **Spring Cloud Config Server (Git repo)**.
 
 * Without `spring-cloud-starter-bootstrap`:
-  Our microservice might start **before** fetching configs → leading to errors.
+  Our microservice might start **before** fetching configs â†’ leading to errors.
 
 * With `spring-cloud-starter-bootstrap`:
-  Microservice **first connects to Config Server** → loads configs → then starts normally.
+  Microservice **first connects to Config Server** â†’ loads configs â†’ then starts normally.
 
 ---
 

@@ -1,6 +1,80 @@
+﻿# Currency Conversion Service - Feign
+
+This learning chapter is part of the micro-services-ws-1 workspace.
+
+## Agenda
+
+- [Problem we will solve](#problem-we-will-solve)
+- [What you will learn](#what-you-will-learn)
+- [How to run](#how-to-run)
+- [Example](#example)
+- [Key points or common mistakes](#key-points-or-common-mistakes)
+- [Chapter summary and next step](#chapter-summary-and-next-step)
+- [Common interview questions](#common-interview-questions-and-short-answers)
+- [Existing content preserved](#existing-content-preserved)
+
+## Problem We Will Solve
+
+This chapter solves the problem of verbose REST client code by replacing manual RestTemplate calls with Feign.
+
+## What You Will Learn
+
+- How Feign clients are enabled
+- How @FeignClient maps to a remote service
+- How Feign simplifies service-to-service calls
+
+## How To Run
+
+- Start 06-Currency-exchange-service-configure-jpa on port 8000
+- Run from 08A-Currency-conversion-service-using-feign: mvn spring-boot:run
+- Open http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+## Example
+
+`	ext
+GET http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+`
+
+Use the response to verify the service starts correctly and the configured endpoint is reachable.
+
+## Key Points Or Common Mistakes
+
+- Keep supporting services running when a chapter depends on them.
+- Check the configured port before opening the URL.
+- Do not change code while testing documentation examples unless the chapter asks for it.
+
+## Chapter Summary And Next Step
+
+This chapter adds one small step in the microservices learning path.
+Continue with [08B-Currency-conversion-service-load-Balacing-with-Ribbon](../08B-Currency-conversion-service-load-Balacing-with-Ribbon/README.md), which solves the next problem in the learning path.
+
+## Common Interview Questions And Short Answers
+
+**Q1. What is Feign?**  
+A declarative REST client for calling HTTP services.
+
+**Q2. Which annotation enables Feign?**  
+@EnableFeignClients enables Feign scanning.
+
+**Q3. Why is Feign cleaner?**  
+The remote call is represented as a Java interface.
+
+**Q4. Is the URL still hardcoded here?**  
+Yes, the Feign client points to localhost:8000.
+
+**Q5. Which endpoint uses Feign?**  
+/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}.
+
+**Q6. What is improved next?**  
+Ribbon adds client-side load balancing.
+
+## Existing Content Preserved
+
+The section below keeps the original README notes from this project so no existing explanation, command, example, or technical detail is lost.
+
 # Exloring/Uses of `openfeign` Dependency 
 ## And
-# 08A – Currency Conversion Service using Feign
+# 08A â€“ Currency Conversion Service using Feign
 
 # **Maven Dependency**
 ```xml
@@ -15,7 +89,7 @@
 
 * **Feign** is a **declarative REST client** provided by **Spring Cloud**.
 * It makes calling other microservices **much simpler** than using `RestTemplate`.
-* Instead of writing 15–20 lines of boilerplate code with `RestTemplate`, we just write a **Java interface** with annotations.
+* Instead of writing 15â€“20 lines of boilerplate code with `RestTemplate`, we just write a **Java interface** with annotations.
 
 ---
 
@@ -33,7 +107,7 @@
 
 # 3. Why do we use it?
 
-* To call another microservice with **just 1–2 lines of code**.
+* To call another microservice with **just 1â€“2 lines of code**.
 * Reduces **boilerplate code**.
 * Increases **readability and maintainability**.
 * Very useful when we have **many microservices** calling each other.
@@ -107,9 +181,9 @@ public class CurrencyConversionController {
 
 ---
 
-# 08A – Currency Conversion Service using Feign
+# 08A â€“ Currency Conversion Service using Feign
 
-## 🔹 The Problem with RestTemplate
+## ðŸ”¹ The Problem with RestTemplate
 
 * To call the Currency Exchange Microservice, we used **RestTemplate**.
 * For a **simple REST API call**, we had to write \~20 lines of code.
@@ -117,18 +191,18 @@ public class CurrencyConversionController {
 
 ---
 
-## 🔹 Solution → Feign
+## ðŸ”¹ Solution â†’ Feign
 
 * **Feign** is a REST client provided by **Spring Cloud**.
 * It makes calling other microservices **very easy**.
 * Instead of writing boilerplate code, we just write an **interface**.
 ---
 
-## 🔹 How Feign Works
+## ðŸ”¹ How Feign Works
 
 * `@FeignClient` is used to call another microservice.
-* `name` → Name of the target microservice.
-* `url` → Where the target microservice is running.
+* `name` â†’ Name of the target microservice.
+* `url` â†’ Where the target microservice is running.
 
 ### Example:
 
@@ -152,9 +226,9 @@ In the controller, we can directly use this proxy instead of writing long RestTe
 ### **1. Start the Microservices**
 
 1. **First**, start the **Currency Exchange Service**
-   → `06-Currency-exchange-service-configure-jpa`
+   â†’ `06-Currency-exchange-service-configure-jpa`
 2. **Second**, start the **Currency Conversion Service**
-   → `08A-Currency-conversion-service-using-feign`
+   â†’ `08A-Currency-conversion-service-using-feign`
 
 ---
 
@@ -185,8 +259,8 @@ Check if the **Currency Exchange Service** is running by opening this URL in our
 
 ### **In Short**
 
-* **Without Feign** → Use `RestTemplate` → More code, boilerplate.
-* **With Feign** → Just define an interface → Spring auto-creates REST client.
+* **Without Feign** â†’ Use `RestTemplate` â†’ More code, boilerplate.
+* **With Feign** â†’ Just define an interface â†’ Spring auto-creates REST client.
 
 ---
 

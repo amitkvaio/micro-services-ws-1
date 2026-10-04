@@ -1,3 +1,77 @@
+﻿# Microservice Config Client
+
+This learning chapter is part of the micro-services-ws-1 workspace.
+
+## Agenda
+
+- [Problem we will solve](#problem-we-will-solve)
+- [What you will learn](#what-you-will-learn)
+- [How to run](#how-to-run)
+- [Example](#example)
+- [Key points or common mistakes](#key-points-or-common-mistakes)
+- [Chapter summary and next step](#chapter-summary-and-next-step)
+- [Common interview questions](#common-interview-questions-and-short-answers)
+- [Existing content preserved](#existing-content-preserved)
+
+## Problem We Will Solve
+
+This chapter solves the problem of a microservice reading values from Config Server instead of only local files.
+
+## What You Will Learn
+
+- How a client connects to Config Server
+- How active profiles affect loaded config
+- How to expose configured values through REST APIs
+
+## How To Run
+
+- Start a Config Server on port 8888
+- Run from 03-MS-Cloud-config-client: mvn spring-boot:run
+- Open http://localhost:2021/reading-from-property-file-limits
+
+## Example
+
+`	ext
+GET http://localhost:2021/reading-from-property-file-limits
+`
+
+Use the response to verify the service starts correctly and the configured endpoint is reachable.
+
+## Key Points Or Common Mistakes
+
+- Keep supporting services running when a chapter depends on them.
+- Check the configured port before opening the URL.
+- Do not change code while testing documentation examples unless the chapter asks for it.
+
+## Chapter Summary And Next Step
+
+This chapter adds one small step in the microservices learning path.
+Continue with [04-Currency-exchange-service-hard-coded-values](../04-Currency-exchange-service-hard-coded-values/README.md), which solves the next problem in the learning path.
+
+## Common Interview Questions And Short Answers
+
+**Q1. What is a Config Client?**  
+A service that reads external configuration from Config Server.
+
+**Q2. Which property points to Config Server?**  
+spring.cloud.config.uri points to the config server.
+
+**Q3. What does spring.profiles.active=dev do?**  
+It loads the dev profile configuration.
+
+**Q4. Which endpoint reads configured limits?**  
+/reading-from-property-file-limits.
+
+**Q5. Why is bootstrap.properties used?**  
+It loads config client settings early in startup.
+
+**Q6. What happens if Config Server is down?**  
+The client may fail or use local/default config depending on setup.
+
+## Existing Content Preserved
+
+The section below keeps the original README notes from this project so no existing explanation, command, example, or technical detail is lost.
+
 # **Objective**
 
 * Read values from a **centralized configuration file/property file**.
@@ -35,7 +109,7 @@
 
    * Properties can be changed **without restarting the application**.
    * Example:
-     Change `limit-service.minimum` in Git → Refresh the client → New value is applied instantly.
+     Change `limit-service.minimum` in Git â†’ Refresh the client â†’ New value is applied instantly.
 
 3. **Environment-Specific Config**
 
@@ -146,10 +220,10 @@ spring.profiles.active=prod
 
 # **Steps to Run**
 
-1. Start **Spring Cloud Config Server** → Example: `02-Cloud-Config-server`.
+1. Start **Spring Cloud Config Server** â†’ Example: `02-Cloud-Config-server`.
 	> It will read the properties file from the git hub repository.
 	> https://github.com/amitkvaio/msconfig	
-2. Start **Config Client Service** → Example: `03-MS-Cloud-config-client`.
+2. Start **Config Client Service** â†’ Example: `03-MS-Cloud-config-client`.
 3. Access the **3rd URL** to read values from the centralized location.
 
 ---
@@ -159,3 +233,4 @@ spring.profiles.active=prod
 * `http://localhost:2021/reading-from-property-file`
 * `http://localhost:2021/reading-from-property-file-limits`
 ---
+

@@ -1,3 +1,78 @@
+﻿# Register Currency Exchange Service With Eureka
+
+This learning chapter is part of the micro-services-ws-1 workspace.
+
+## Agenda
+
+- [Problem we will solve](#problem-we-will-solve)
+- [What you will learn](#what-you-will-learn)
+- [How to run](#how-to-run)
+- [Example](#example)
+- [Key points or common mistakes](#key-points-or-common-mistakes)
+- [Chapter summary and next step](#chapter-summary-and-next-step)
+- [Common interview questions](#common-interview-questions-and-short-answers)
+- [Existing content preserved](#existing-content-preserved)
+
+## Problem We Will Solve
+
+This chapter solves the problem of making Currency Exchange discoverable through Eureka.
+
+## What You Will Learn
+
+- How a service registers as a Eureka client
+- How JPA/H2 exchange data works with Eureka
+- How multiple instances can register under one service name
+
+## How To Run
+
+- Start 09-Eureka-naming-server
+- Run from this project: mvn spring-boot:run
+- Open http://localhost:8000/currency-exchange/from/USD/to/INR
+- Optional second instance after packaging: java -jar target/10-Register-Currency-exchange-service-wtih-Eureka-naming-server-0.0.1-SNAPSHOT.jar --server.port=8002
+
+## Example
+
+`	ext
+GET http://localhost:8000/currency-exchange/from/USD/to/INR
+`
+
+Use the response to verify the service starts correctly and the configured endpoint is reachable.
+
+## Key Points Or Common Mistakes
+
+- Keep supporting services running when a chapter depends on them.
+- Check the configured port before opening the URL.
+- Do not change code while testing documentation examples unless the chapter asks for it.
+
+## Chapter Summary And Next Step
+
+This chapter adds one small step in the microservices learning path.
+Continue with [11-Register-Currency-conversion-service-with-eureka-naming-server](../11-Register-Currency-conversion-service-with-eureka-naming-server/README.md), which solves the next problem in the learning path.
+
+## Common Interview Questions And Short Answers
+
+**Q1. What is registered in Eureka?**  
+The currency-exchange service.
+
+**Q2. Which property points to Eureka?**  
+eureka.client.service-url.defaultZone.
+
+**Q3. Why run multiple instances?**  
+To test discovery and load balancing.
+
+**Q4. Which database is used?**  
+H2 in-memory database.
+
+**Q5. Where is data loaded from?**  
+data.sql.
+
+**Q6. What comes next?**  
+Currency Conversion calls Exchange by service name.
+
+## Existing Content Preserved
+
+The section below keeps the original README notes from this project so no existing explanation, command, example, or technical detail is lost.
+
 ## **Register the services with eureka server**
 ---
 
@@ -37,21 +112,21 @@
 
 * Suppose we have these services:
 
-  * **Eureka Server** (Service Registry) → runs at `http://localhost:8761`
-  * **Currency-exchange** → registers with Eureka
-  * **Currency-conversion** → registers with Eureka
+  * **Eureka Server** (Service Registry) â†’ runs at `http://localhost:8761`
+  * **Currency-exchange** â†’ registers with Eureka
+  * **Currency-conversion** â†’ registers with Eureka
 
 Now, if **Currency-conversion** wants to call **Currency-exchange**:
 
-* **Without Eureka →** It must know the exact URL like `http://localhost:8000/currency-exchange/from/USD/to/INR`
-* **With Eureka →** It just asks for `CURRENCY-EXCHANGE` from Eureka, and Eureka gives the correct instance (even if it’s on another port or server).
+* **Without Eureka â†’** It must know the exact URL like `http://localhost:8000/currency-exchange/from/USD/to/INR`
+* **With Eureka â†’** It just asks for `CURRENCY-EXCHANGE` from Eureka, and Eureka gives the correct instance (even if itâ€™s on another port or server).
 
 ---
 
 ### **Widely Used Annotations with Eureka Client**
 
-* `@EnableEurekaClient` → Marks the application as a Eureka client.
-* `@LoadBalanced` (with RestTemplate) → Enables **client-side load balancing** using Eureka service names.
+* `@EnableEurekaClient` â†’ Marks the application as a Eureka client.
+* `@LoadBalanced` (with RestTemplate) â†’ Enables **client-side load balancing** using Eureka service names.
 * Example:
 
 ```java
@@ -135,7 +210,7 @@ Here, `"CURRENCY-EXCHANGE"` is the **service name** registered in Eureka, not a 
 Imagine **Amazon**:
 
 * They have services like `Product-Service`, `Cart-Service`, `Order-Service`, `Payment-Service`.
-* If tomorrow `Product-Service` runs on a new server or different port → **no code change is needed**, because Eureka keeps track of it.
+* If tomorrow `Product-Service` runs on a new server or different port â†’ **no code change is needed**, because Eureka keeps track of it.
 * This makes the system **scalable** and **fault tolerant**.
 
 ---
@@ -168,7 +243,7 @@ This dependency is used to **make your application discoverable** (register itse
      spring.jpa.hibernate.ddl-auto=none
      spring.jpa.defer-datasource-initialization=true
      ```
-   * `spring.jpa.defer-datasource-initialization=true` → ensures that **data.sql** is executed after JPA schema creation.
+   * `spring.jpa.defer-datasource-initialization=true` â†’ ensures that **data.sql** is executed after JPA schema creation.
 
 3. **Data Initialization (data.sql)**
 
@@ -190,7 +265,7 @@ This dependency is used to **make your application discoverable** (register itse
 
 4. **H2 Console Access**
 
-   * Open browser → [http://localhost:8000/h2-console](http://localhost:8000/h2-console)
+   * Open browser â†’ [http://localhost:8000/h2-console](http://localhost:8000/h2-console)
    * JDBC URL: `jdbc:h2:mem:testdb`
    * Query Example:
 
@@ -216,15 +291,15 @@ This dependency is used to **make your application discoverable** (register itse
 6. **Data Reset on Restart**
 
    * Since H2 is **in-memory**, data is stored only in RAM.
-   * On every server restart → existing data will be **wiped out** and reloaded from `data.sql`.
+   * On every server restart â†’ existing data will be **wiped out** and reloaded from `data.sql`.
 
 ---
 
 ### **Quick Example Flow**
 
-1. Start application → H2 DB is created in memory.
-2. `data.sql` runs → Table `CURRENCY_EXCHANGE` created, USD→INR inserted.
-3. Open **H2 Console** → Run `SELECT * FROM CURRENCY_EXCHANGE;` → See data.
-4. Call API → `/currency-exchange/from/USD/to/INR` → JSON response from H2 DB.
-5. Restart app → DB resets (fresh data loaded again).
+1. Start application â†’ H2 DB is created in memory.
+2. `data.sql` runs â†’ Table `CURRENCY_EXCHANGE` created, USDâ†’INR inserted.
+3. Open **H2 Console** â†’ Run `SELECT * FROM CURRENCY_EXCHANGE;` â†’ See data.
+4. Call API â†’ `/currency-exchange/from/USD/to/INR` â†’ JSON response from H2 DB.
+5. Restart app â†’ DB resets (fresh data loaded again).
 ---

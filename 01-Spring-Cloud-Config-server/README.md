@@ -1,3 +1,77 @@
+﻿# Spring Cloud Config Server - Local Git Repository
+
+This learning chapter is part of the micro-services-ws-1 workspace.
+
+## Agenda
+
+- [Problem we will solve](#problem-we-will-solve)
+- [What you will learn](#what-you-will-learn)
+- [How to run](#how-to-run)
+- [Example](#example)
+- [Key points or common mistakes](#key-points-or-common-mistakes)
+- [Chapter summary and next step](#chapter-summary-and-next-step)
+- [Common interview questions](#common-interview-questions-and-short-answers)
+- [Existing content preserved](#existing-content-preserved)
+
+## Problem We Will Solve
+
+This chapter solves the problem of keeping configuration outside the service by reading config from a local Git repository.
+
+## What You Will Learn
+
+- How Spring Cloud Config Server works
+- How @EnableConfigServer enables config serving
+- How services can read environment-specific config
+
+## How To Run
+
+- Prepare local config repository at D:/git/msconfig
+- Run from 01-Spring-Cloud-Config-server: mvn spring-boot:run
+- Open http://localhost:8888/centralized/default or /dev or /prod
+
+## Example
+
+`	ext
+GET http://localhost:8888/centralized/dev
+`
+
+Use the response to verify the service starts correctly and the configured endpoint is reachable.
+
+## Key Points Or Common Mistakes
+
+- Keep supporting services running when a chapter depends on them.
+- Check the configured port before opening the URL.
+- Do not change code while testing documentation examples unless the chapter asks for it.
+
+## Chapter Summary And Next Step
+
+This chapter adds one small step in the microservices learning path.
+Continue with [02-Cloud-Config-server](../02-Cloud-Config-server/README.md), which solves the next problem in the learning path.
+
+## Common Interview Questions And Short Answers
+
+**Q1. What is Spring Cloud Config Server?**  
+It is a central server for externalized application configuration.
+
+**Q2. Why use a Git repository for config?**  
+Git gives versioning, history, and environment-specific files.
+
+**Q3. What annotation enables Config Server?**  
+@EnableConfigServer enables it.
+
+**Q4. Which port is used?**  
+The config server runs on port 8888.
+
+**Q5. What is default-label?**  
+It tells Config Server which Git branch or label to read.
+
+**Q6. What problem does this solve?**  
+It avoids copying config into every microservice.
+
+## Existing Content Preserved
+
+The section below keeps the original README notes from this project so no existing explanation, command, example, or technical detail is lost.
+
 # **About Spring cloud Config Server**
 ```xml
 <dependency>
@@ -27,7 +101,7 @@
   * Open each service
   * Update the password
   * Rebuild & redeploy all services
-    → **This is time-consuming and error-prone.**
+    â†’ **This is time-consuming and error-prone.**
 
 ## **Scenario with Config Server:**
 
@@ -39,7 +113,7 @@
   * `application.properties` (common configs for all services)
 * Config Server pulls the configuration from Git and provides it over HTTP.
 * All microservices read their configuration from the Config Server.
-  → **We update config in Git → All services can refresh without redeploying code.**
+  â†’ **We update config in Git â†’ All services can refresh without redeploying code.**
 
 ---
 
@@ -80,7 +154,7 @@ spring.cloud.config.server.git.default-label=main
 
 # **Best Practice**
 
-* If we don’t want default properties, **don’t create `centralized.properties`**.
+* If we donâ€™t want default properties, **donâ€™t create `centralized.properties`**.
 * Instead, just use environment-specific files like:
 
   * `centralized-dev.properties`
@@ -100,7 +174,7 @@ spring.cloud.config.server.git.default-label=main
 
 # **Why URLs Work Without a Controller?**
 
-* We don’t need to manually write a REST Controller.
+* We donâ€™t need to manually write a REST Controller.
 * Spring Cloud Config Server provides an **in-built controller** when we add the dependency.
 * This controller exposes config files automatically using this format:
 

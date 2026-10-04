@@ -1,3 +1,77 @@
+﻿# Currency Exchange Service - JPA and H2
+
+This learning chapter is part of the micro-services-ws-1 workspace.
+
+## Agenda
+
+- [Problem we will solve](#problem-we-will-solve)
+- [What you will learn](#what-you-will-learn)
+- [How to run](#how-to-run)
+- [Example](#example)
+- [Key points or common mistakes](#key-points-or-common-mistakes)
+- [Chapter summary and next step](#chapter-summary-and-next-step)
+- [Common interview questions](#common-interview-questions-and-short-answers)
+- [Existing content preserved](#existing-content-preserved)
+
+## Problem We Will Solve
+
+This chapter solves the problem of storing exchange values in a database instead of returning only hard-coded values.
+
+## What You Will Learn
+
+- How Spring Data JPA is added
+- How H2 stores sample exchange data
+- How repository lookup works for currency pairs
+
+## How To Run
+
+- Run from 06-Currency-exchange-service-configure-jpa: mvn spring-boot:run
+- Open http://localhost:8000/currency-exchange-jpa/from/USD/to/INR
+- Optional H2 console: http://localhost:8000/h2-console with JDBC URL jdbc:h2:mem:amitdb
+
+## Example
+
+`	ext
+GET http://localhost:8000/currency-exchange-jpa/from/EUR/to/INR
+`
+
+Use the response to verify the service starts correctly and the configured endpoint is reachable.
+
+## Key Points Or Common Mistakes
+
+- Keep supporting services running when a chapter depends on them.
+- Check the configured port before opening the URL.
+- Do not change code while testing documentation examples unless the chapter asks for it.
+
+## Chapter Summary And Next Step
+
+This chapter adds one small step in the microservices learning path.
+Continue with [07-currency-conversion-service-used-of-resttemplate](../07-currency-conversion-service-used-of-resttemplate/README.md), which solves the next problem in the learning path.
+
+## Common Interview Questions And Short Answers
+
+**Q1. Why use H2 here?**  
+It is lightweight and easy for local learning.
+
+**Q2. Where is sample data loaded from?**  
+src/main/resources/data.sql.
+
+**Q3. Which endpoint uses JPA?**  
+/currency-exchange-jpa/from/{from}/to/{to}.
+
+**Q4. What happens after restart?**  
+In-memory H2 data is recreated from data.sql.
+
+**Q5. Why keep the hard-coded endpoint?**  
+It allows comparison with database-driven output.
+
+**Q6. What problem comes next?**  
+A conversion service needs to call this exchange service.
+
+## Existing Content Preserved
+
+The section below keeps the original README notes from this project so no existing explanation, command, example, or technical detail is lost.
+
 # **Currency Exchange Service with JPA & H2 Database**
 ---
 
@@ -21,7 +95,7 @@
 
 * H2 is a **lightweight, in-memory database**.
 * It is often used for **development, testing, and learning**.
-* It does not need separate installation — it runs inside the application.
+* It does not need separate installation â€” it runs inside the application.
 
 ---
 
@@ -87,10 +161,10 @@ spring.datasource.url=jdbc:h2:mem:amitdb
 spring.jpa.defer-datasource-initialization=true
 ```
 
-* `spring.jpa.show-sql=true` → SQL queries will be shown in logs.
-* `spring.h2.console.enabled=true` → Enables H2 console access.
-* `spring.datasource.url=jdbc:h2:mem:amitdb` → Defines in-memory DB name (`amitdb`).
-* `spring.jpa.defer-datasource-initialization=true` → Runs `data.sql` at startup (creates table + inserts data).
+* `spring.jpa.show-sql=true` â†’ SQL queries will be shown in logs.
+* `spring.h2.console.enabled=true` â†’ Enables H2 console access.
+* `spring.datasource.url=jdbc:h2:mem:amitdb` â†’ Defines in-memory DB name (`amitdb`).
+* `spring.jpa.defer-datasource-initialization=true` â†’ Runs `data.sql` at startup (creates table + inserts data).
 
 ---
 
@@ -184,6 +258,6 @@ http://localhost:8000/currency-exchange-jpa/from/AUD/to/INR
 ---
 # **Example Use Case:**
 
-* If a client requests currency conversion `USD → INR`, service fetches conversion multiple (e.g., `82`) from H2 DB and returns result.
+* If a client requests currency conversion `USD â†’ INR`, service fetches conversion multiple (e.g., `82`) from H2 DB and returns result.
 * In real-world, this can be extended to fetch from Oracle or MySQL instead of H2.
 ---
